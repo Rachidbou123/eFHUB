@@ -7,6 +7,7 @@ import { SquadBuilderPage } from './components/SquadBuilderPage';
 import { ComparePage } from './components/ComparePage';
 import { TierListPage } from './components/TierListPage';
 import { CommunityPage } from './components/CommunityPage';
+import { ErrorBoundary } from './components/ErrorBoundary';
 
 export default function App() {
   const [activeTab, setActiveTab] = useState<string>('home');
@@ -31,65 +32,85 @@ export default function App() {
     switch (activeTab) {
       case 'home':
         return (
-          <LandingPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="LandingPage">
+            <LandingPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         );
       case 'players':
         return (
-          <PlayersPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-            compareList={compareList}
-            setCompareList={setCompareList}
-          />
+          <ErrorBoundary componentName="PlayersPage">
+            <PlayersPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+              compareList={compareList}
+              setCompareList={setCompareList}
+            />
+          </ErrorBoundary>
         );
       case 'player-detail':
         return selectedPlayerId ? (
-          <PlayerDetailPage
-            playerId={selectedPlayerId}
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="PlayerDetailPage">
+            <PlayerDetailPage
+              playerId={selectedPlayerId}
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         ) : (
-          <PlayersPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-            compareList={compareList}
-            setCompareList={setCompareList}
-          />
+          <ErrorBoundary componentName="PlayersPage">
+            <PlayersPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+              compareList={compareList}
+              setCompareList={setCompareList}
+            />
+          </ErrorBoundary>
         );
       case 'squad-builder':
-        return <SquadBuilderPage />;
+        return (
+          <ErrorBoundary componentName="SquadBuilderPage">
+            <SquadBuilderPage />
+          </ErrorBoundary>
+        );
       case 'compare':
         return (
-          <ComparePage
-            compareIds={compareList}
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="ComparePage">
+            <ComparePage
+              compareIds={compareList}
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         );
       case 'tier-list':
         return (
-          <TierListPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="TierListPage">
+            <TierListPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         );
       case 'community':
         return (
-          <CommunityPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="CommunityPage">
+            <CommunityPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         );
       default:
         return (
-          <LandingPage
-            setActiveTab={handleSetTab}
-            setSelectedPlayerId={handleSetPlayer}
-          />
+          <ErrorBoundary componentName="LandingPage">
+            <LandingPage
+              setActiveTab={handleSetTab}
+              setSelectedPlayerId={handleSetPlayer}
+            />
+          </ErrorBoundary>
         );
     }
   };
@@ -101,11 +122,13 @@ export default function App() {
       <div className="absolute bottom-0 left-0 w-[450px] h-[450px] rounded-full bg-[#00FF00]/3 blur-[140px] pointer-events-none select-none z-0" />
 
       {/* Styled Neon Header */}
-      <Navbar
-        activeTab={activeTab}
-        setActiveTab={handleSetTab}
-        setSelectedPlayerId={handleSetPlayer}
-      />
+      <ErrorBoundary componentName="Navbar">
+        <Navbar
+          activeTab={activeTab}
+          setActiveTab={handleSetTab}
+          setSelectedPlayerId={handleSetPlayer}
+        />
+      </ErrorBoundary>
 
       {/* Primary Dynamic Content Frame */}
       <main className="flex-1 w-full relative z-10 flex flex-col transition-all duration-200">
