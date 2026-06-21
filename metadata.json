@@ -1,0 +1,6 @@
+{
+  "name": "eFootball Hub",
+  "description": "Production-quality football database, player stats analyzer, build calculators, and squad builder for eFootball.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
