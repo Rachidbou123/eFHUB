@@ -52,6 +52,7 @@ export function InteractiveCard({ player, customRating, onClick, scale = 1 }: In
           bottomLineGlow: '0 -2px 10px rgba(239, 68, 68, 0.6)'
         };
       case 'showtime':
+      case 'showtime_template':
         return {
           border: 'rgba(236, 72, 153, 0.9)',
           glow: '0 0 15px rgba(236, 72, 153, 0.45), inset 0 0 10px rgba(6, 182, 212, 0.25)',
@@ -117,68 +118,100 @@ export function InteractiveCard({ player, customRating, onClick, scale = 1 }: In
     let src = '';
     let alt = '';
 
-    switch (player.cardType) {
-      case 'showtime':
-        src = '/src/assets/images/0601_402_m01.png';
-        alt = 'Show Time';
-        break;
-      case 'epic':
-        src = '/src/assets/images/0601_480_m01.png';
-        alt = 'Epic';
-        break;
-      case 'potw':
-        src = '/src/assets/images/POTD.png';
-        alt = 'Player of the Day / Highlight';
-        break;
-      case 'bigtime':
-        src = '/src/assets/images/EPIC.png';
-        alt = 'Big Time';
-        break;
-      case 'epic_highlight':
-        src = '/src/assets/images/EPIC (2).png';
-        alt = 'Epic / Highlight';
-        break;
-      case 'epic_special':
-        src = '/src/assets/images/EPIC (3).png';
-        alt = 'Epic / Special Concept';
-        break;
-      case 'legendary':
-        src = '/src/assets/images/EPIC (4).png';
-        alt = 'Legendary';
-        break;
-      case 'showtime_effect':
-        src = '/src/assets/images/0600_977_m01.png';
-        alt = 'Show Time Background Effect';
-        break;
-      case 'highlight':
-      case 'highlight_special':
-        src = '/src/assets/images/0600_1102_m01.png';
-        alt = 'Highlight / Special Edition';
-        break;
-      case 'highlight_special_alt':
-        src = '/src/assets/images/0600_1103_m01.png';
-        alt = 'Highlight / Special Edition Alternative';
-        break;
-      case 'standard':
-      default:
-        // Graphite metallic standard style
-        return (
-          <svg className="absolute inset-0 w-full h-full" viewBox="0 0 189 123" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <defs>
-              <linearGradient id="stdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-                <stop offset="0%" stopColor="#2e3541"/>
-                <stop offset="100%" stopColor="#0f1319"/>
-              </linearGradient>
-              <pattern id="carbon" width="6" height="6" patternUnits="userSpaceOnUse">
-                <rect width="3" height="3" fill="#ffffff" fillOpacity="0.03"/>
-                <rect x="3" y="3" width="3" height="3" fill="#ffffff" fillOpacity="0.03"/>
-              </pattern>
-            </defs>
-            <rect width="189" height="123" fill="url(#stdGrad)"/>
-            <rect width="189" height="123" fill="url(#carbon)"/>
-            <rect x="2" y="2" width="185" height="119" rx="5" stroke="#4b5563" strokeWidth="0.8" strokeOpacity="0.4" fill="none"/>
-          </svg>
-        );
+    // National Selection highlights
+    const nationalBgs: { [key: string]: string } = {
+      'Argentina': 'Argentina.png',
+      'Brazil': 'Brazil .png',
+      'Egypt': 'Egypt .png',
+      'England': 'England .png',
+      'France': 'France.png',
+      'Germany': 'Germany .png',
+      'Japan': 'Japan .png',
+      'Malaysia': 'Malaysia .png',
+      'Morocco': 'Morocco.png',
+      'Netherlands': 'Netherlands.png',
+      'Portugal': 'Portugal .png',
+      'Spain': 'Spain.png',
+      'Thailand': 'Thailand .png',
+      'Türkiye': 'Türkiye.png',
+      'Turkey': 'Türkiye.png'
+    };
+
+    // Check if it's a highlight national selection background
+    if (
+      (player.cardType === 'highlight' || player.cardType === 'highlight_special' || player.cardType === 'highlight_special_alt') &&
+      nationalBgs[player.nation]
+    ) {
+      src = `/src/assets/images/${nationalBgs[player.nation]}`;
+      alt = `Highlight / ${player.nation} National Team Selection`;
+    } else {
+      switch (player.cardType) {
+        case 'showtime':
+          src = '/src/assets/images/0601_402_m01.png';
+          alt = 'Show Time';
+          break;
+        case 'epic':
+          src = '/src/assets/images/0601_480_m01.png';
+          alt = 'Epic';
+          break;
+        case 'potw':
+          src = '/src/assets/images/POTD.png';
+          alt = 'Player of the Day / Highlight';
+          break;
+        case 'bigtime':
+          src = '/src/assets/images/EPIC.png';
+          alt = 'Big Time';
+          break;
+        case 'epic_highlight':
+          src = '/src/assets/images/EPIC (2).png';
+          alt = 'Epic / Highlight';
+          break;
+        case 'epic_special':
+          src = '/src/assets/images/EPIC (3).png';
+          alt = 'Epic / Special Concept';
+          break;
+        case 'legendary':
+          src = '/src/assets/images/EPIC (4).png';
+          alt = 'Legendary';
+          break;
+        case 'showtime_effect':
+          src = '/src/assets/images/0600_977_m01.png';
+          alt = 'Show Time Background Effect';
+          break;
+        case 'showtime_template':
+          src = '/src/assets/images/0601_338_m01.png';
+          alt = 'Show Time Template';
+          break;
+        case 'highlight':
+        case 'highlight_special':
+          src = '/src/assets/images/0600_1102_m01.png';
+          alt = 'Highlight / Special Edition';
+          break;
+        case 'highlight_special_alt':
+          src = '/src/assets/images/0600_1103_m01.png';
+          alt = 'Highlight / Special Edition Alternative';
+          break;
+        case 'standard':
+        default:
+          // Graphite metallic standard style
+          return (
+            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 189 123" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="stdGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#2e3541"/>
+                  <stop offset="100%" stopColor="#0f1319"/>
+                </linearGradient>
+                <pattern id="carbon" width="6" height="6" patternUnits="userSpaceOnUse">
+                  <rect width="3" height="3" fill="#ffffff" fillOpacity="0.03"/>
+                  <rect x="3" y="3" width="3" height="3" fill="#ffffff" fillOpacity="0.03"/>
+                </pattern>
+              </defs>
+              <rect width="189" height="123" fill="url(#stdGrad)"/>
+              <rect width="189" height="123" fill="url(#carbon)"/>
+              <rect x="2" y="2" width="185" height="119" rx="5" stroke="#4b5563" strokeWidth="0.8" strokeOpacity="0.4" fill="none"/>
+            </svg>
+          );
+      }
     }
 
     return (

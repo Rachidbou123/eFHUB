@@ -45,6 +45,7 @@ export function PlayersPage({
     'epic_highlight',
     'epic_special',
     'showtime_effect',
+    'showtime_template',
     'highlight_special',
     'highlight_special_alt'
   ];

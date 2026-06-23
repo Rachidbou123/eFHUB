@@ -16,7 +16,7 @@ export function LandingPage({ setActiveTab, setSelectedPlayerId }: LandingPagePr
     (p) => p.cardType === 'epic' || p.cardType === 'epic_highlight' || p.cardType === 'epic_special' || p.cardType === 'legendary'
   );
   const showtimes = allPlayers.filter(
-    (p) => p.cardType === 'showtime' || p.cardType === 'bigtime' || p.cardType === 'showtime_effect'
+    (p) => p.cardType === 'showtime' || p.cardType === 'bigtime' || p.cardType === 'showtime_effect' || p.cardType === 'showtime_template'
   );
   const potws = allPlayers.filter(
     (p) => p.cardType === 'potw' || p.cardType === 'highlight' || p.cardType === 'highlight_special' || p.cardType === 'highlight_special_alt'
