@@ -67,7 +67,7 @@ export interface Player {
   rating: number; // Base rating
   maxRating: number; // Maximum potential
   position: 'ST' | 'CF' | 'SS' | 'LWF' | 'RWF' | 'AMF' | 'CMF' | 'DMF' | 'LMF' | 'RMF' | 'CB' | 'LB' | 'RB' | 'GK';
-  cardType: 'epic' | 'bigtime' | 'showtime' | 'potw' | 'highlight' | 'standard';
+  cardType: 'epic' | 'bigtime' | 'showtime' | 'potw' | 'highlight' | 'standard' | 'legendary' | 'epic_highlight' | 'epic_special' | 'showtime_effect' | 'highlight_special' | 'highlight_special_alt';
   stars: 1 | 2 | 3 | 4 | 5;
   booster?: {
     name: string;

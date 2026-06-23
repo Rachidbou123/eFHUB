@@ -33,7 +33,21 @@ export function PlayersPage({
 
   // Filter positions
   const positions = ['ALL', 'CF', 'ST', 'SS', 'LWF', 'RWF', 'AMF', 'CMF', 'DMF', 'LMF', 'RMF', 'CB', 'LB', 'RB', 'GK'];
-  const cardTypes = ['ALL', 'epic', 'bigtime', 'showtime', 'potw', 'highlight', 'standard'];
+  const cardTypes = [
+    'ALL', 
+    'epic', 
+    'bigtime', 
+    'showtime', 
+    'potw', 
+    'highlight', 
+    'standard',
+    'legendary',
+    'epic_highlight',
+    'epic_special',
+    'showtime_effect',
+    'highlight_special',
+    'highlight_special_alt'
+  ];
 
   // Apply filters and sorting
   const filteredPlayers = useMemo(() => {

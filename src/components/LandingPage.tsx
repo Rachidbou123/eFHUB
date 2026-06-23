@@ -12,9 +12,15 @@ interface LandingPageProps {
 export function LandingPage({ setActiveTab, setSelectedPlayerId }: LandingPageProps) {
   // Get lists of players based on card categories
   const allPlayers = Object.values(PLAYERS_DB);
-  const epics = allPlayers.filter((p) => p.cardType === 'epic');
-  const showtimes = allPlayers.filter((p) => p.cardType === 'showtime' || p.cardType === 'bigtime');
-  const potws = allPlayers.filter((p) => p.cardType === 'potw' || p.cardType === 'highlight');
+  const epics = allPlayers.filter(
+    (p) => p.cardType === 'epic' || p.cardType === 'epic_highlight' || p.cardType === 'epic_special' || p.cardType === 'legendary'
+  );
+  const showtimes = allPlayers.filter(
+    (p) => p.cardType === 'showtime' || p.cardType === 'bigtime' || p.cardType === 'showtime_effect'
+  );
+  const potws = allPlayers.filter(
+    (p) => p.cardType === 'potw' || p.cardType === 'highlight' || p.cardType === 'highlight_special' || p.cardType === 'highlight_special_alt'
+  );
 
   const handlePlayerClick = (id: string) => {
     setSelectedPlayerId(id);
